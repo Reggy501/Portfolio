@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reagan — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --accent: #7c6ff7;
+    --accent2: #4fc3a1;
+    --accent3: #f06a50;
+    --text: #e8e6f0;
+    --muted: #7a7890;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── grid overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,111,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,111,247,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── sections ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── hero ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner { max-width: 700px; }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent2);
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span { color: var(--accent); }
+  h1 em { color: var(--accent2); font-style: normal; }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+  }
+
+  .chip-purple { border-color: var(--accent); color: var(--accent); background: rgba(124,111,247,0.08); }
+  .chip-teal { border-color: var(--accent2); color: var(--accent2); background: rgba(79,195,161,0.08); }
+  .chip-coral { border-color: var(--accent3); color: var(--accent3); background: rgba(240,106,80,0.08); }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: #9088f9; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 4rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    margin-left: 4px;
+  }
+
+  /* ── about ── */
+  #about {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .stat-cell {
+    background: var(--bg2);
+    padding: 1.5rem;
+  }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── skills ── */
+  #skills {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+
+  .skill-cat {
+    background: var(--bg2);
+    padding: 1.75rem;
+  }
+
+  .skill-cat-icon {
+    font-size: 18px;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .skill-cat-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .skill-cat-name.purple { color: var(--accent); }
+  .skill-cat-name.teal { color: var(--accent2); }
+  .skill-cat-name.coral { color: var(--accent3); }
+  .skill-cat-name.yellow { color: #f5c842; }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--bg3);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── projects ── */
+  #projects {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .project-card.purple::before { background: var(--accent); }
+  .project-card.teal::before { background: var(--accent2); }
+  .project-card.coral::before { background: var(--accent3); }
+  .project-card.yellow::before { background: #f5c842; }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .project-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-title {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .project-metrics {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .metric {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ── experience ── */
+  #experience {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    margin-top: 3rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-title {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-company {
+    font-size: 0.875rem;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── contact ── */
+  #contact {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .contact-email {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 2rem 0;
+    display: block;
+    text-decoration: none;
+  }
+
+  .contact-email:hover { color: var(--text); }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .social-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .social-link:hover { color: var(--text); }
+
+  /* ── footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── animations ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    #hero { padding: 6rem 1.5rem 4rem; }
+    #about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    #skills, #projects, #experience, #contact { padding: 4rem 1.5rem; }
+    h1 { font-size: 2.5rem; }
+    footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+    .hero-scroll { left: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">R.C.REUBEN</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="position:relative;">
+  <div class="hero-inner">
+    <div class="hero-tag">Based in Dar es Salaam, Tanzania</div>
+    <h1>
+      Reagan<br>
+      <span>Charles</span> <em>Reuben</em>
+    </h1>
+    <p class="hero-desc">
+      Information Systems student and software engineer with a passion for building secure, scalable, and intelligent systems — from full-stack web apps to ML pipelines to production cloud infrastructure.
+    </p>
+    <div class="hero-chips">
+      <span class="chip chip-purple">Web Development</span>
+      <span class="chip chip-teal">Machine Learning</span>
+      <span class="chip chip-coral">DevOps / Cloud</span>
+      <span class="chip chip-purple">Cybersecurity</span>
+      <span class="chip chip-teal">Python / Django</span>
+      <span class="chip chip-coral">Docker / Kubernetes</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text fade-up">
+    <div class="section-label">About</div>
+    <h2>Builder.<br>Problem-solver.<br>Generalist.</h2>
+    <p>I'm an Information Systems Management student at Ardhi University, Dar es Salaam, with a genuine passion for technology and a broad engineering skillset spanning web development, machine learning, DevOps, and cybersecurity.</p>
+    <p>I enjoy exploring innovative solutions to technical challenges and continuously pushing my expertise forward — whether that's architecting microservices on AWS, training medical AI models, or tightening security across a distributed system. My goal is always to create solutions that are efficient, secure, and built to scale.</p>
+    <p>I stay sharp by keeping up with industry trends and learning by doing — the best ideas come from building real things that make a real impact.</p>
+  </div>
+
+  <div class="about-stats fade-up">
+    <div class="stat-cell">
+      <div class="stat-num">83.88%</div>
+      <div class="stat-label">Best DR detection accuracy</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">0.92</div>
+      <div class="stat-label">QWK score (retinopathy model)</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Model ensemble (EfficientNet B3/B4)</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">DevOps stages completed</div>
+    </div>
+    <div class="stat-cell" style="grid-column: span 2;">
+      <div class="stat-num" style="font-size:1.4rem;">Dar es Salaam → Global</div>
+      <div class="stat-label">Building from East Africa, shipping to the world</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label fade-up">Technical Skills</div>
+  <h2 class="fade-up">A full-stack toolkit</h2>
+
+  <div class="skills-grid fade-up">
+    <div class="skill-cat">
+      <span class="skill-cat-icon">🌐</span>
+      <div class="skill-cat-name purple">Web Development</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">Django REST Framework</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">HTML / CSS / JS</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">JWT Auth</span>
+        <span class="skill-tag">Nginx</span>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <span class="skill-cat-icon">🧠</span>
+      <div class="skill-cat-name teal">Machine Learning & AI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">TensorFlow / Keras</span>
+        <span class="skill-tag">EfficientNet</span>
+        <span class="skill-tag">Grad-CAM</span>
+        <span class="skill-tag">Ensemble Models</span>
+        <span class="skill-tag">Focal Loss</span>
+        <span class="skill-tag">TTA Augmentation</span>
+        <span class="skill-tag">Hugging Face</span>
+        <span class="skill-tag">FastAPI</span>
+        <span class="skill-tag">Transfer Learning</span>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <span class="skill-cat-icon">☁️</span>
+      <div class="skill-cat-name coral">DevOps & Cloud</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes (EKS)</span>
+        <span class="skill-tag">AWS (EKS, RDS, VPC, ALB)</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Ansible</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">GitOps</span>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <span class="skill-cat-icon">🔐</span>
+      <div class="skill-cat-name yellow">Security & Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Cybersecurity</span>
+        <span class="skill-tag">JWT Authentication</span>
+        <span class="skill-tag">IAM Roles</span>
+        <span class="skill-tag">Security Groups</span>
+        <span class="skill-tag">Linux (Ubuntu)</span>
+        <span class="skill-tag">Bash Scripting</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="skill-cat" style="grid-column: span 2;">
+      <span class="skill-cat-icon">🎨</span>
+      <div class="skill-cat-name purple">Multimedia & Design</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Adobe Photoshop</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">CapCut</span>
+        <span class="skill-tag">Video Editing</span>
+        <span class="skill-tag">Poster Design</span>
+        <span class="skill-tag">Documentary Production</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-up">Projects</div>
+  <h2 class="fade-up">Selected work</h2>
+
+  <div class="projects-grid">
+    <div class="project-card purple fade-up">
+      <div class="project-type">Machine Learning · Medical AI</div>
+      <div class="project-title">Diabetic Retinopathy Detection System</div>
+      <div class="project-desc">
+        A 4-model EfficientNetB3/B4 ensemble that classifies diabetic retinopathy severity from retinal fundus images. Features 7-augmentation test-time augmentation, Grad-CAM visualization, Claude-powered clinical recommendations, and automated PDF report generation.
+      </div>
+      <div class="project-metrics">
+        <span class="metric">83.88% accuracy</span>
+        <span class="metric">QWK 0.9198</span>
+        <span class="metric">4-model ensemble</span>
+      </div>
+      <div class="project-stack">
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">EfficientNet</span>
+        <span class="skill-tag">FastAPI</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Streamlit</span>
+        <span class="skill-tag">Hugging Face</span>
+        <span class="skill-tag">Claude API</span>
+      </div>
+    </div>
+
+    <div class="project-card teal fade-up">
+      <div class="project-type">Full-Stack Web · Tourism</div>
+      <div class="project-title">TourLink — Tourism Management Platform</div>
+      <div class="project-desc">
+        A full-stack tourism management platform serving the Tanzanian market. Built with Django and React, featuring booking management, operator dashboards, and a user-facing discovery interface.
+      </div>
+      <div class="project-stack">
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">REST API</span>
+      </div>
+    </div>
+
+    <div class="project-card coral fade-up">
+      <div class="project-type">DevOps · Infrastructure</div>
+      <div class="project-title">Production-grade DevOps Pipeline</div>
+      <div class="project-desc">
+        End-to-end DevOps system built on AWS — CI/CD with GitHub Actions (green pipeline), container orchestration via Kubernetes, infrastructure-as-code with Terraform, and full observability with Prometheus + Grafana (Node Exporter dashboard live).
+      </div>
+      <div class="project-stack">
+        <span class="skill-tag">AWS EC2</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+      </div>
+    </div>
+
+    <div class="project-card yellow fade-up">
+      <div class="project-type">Machine Learning · Assignment</div>
+      <div class="project-title">House Price Regression Pipeline</div>
+      <div class="project-desc">
+        A complete ML pipeline for house price prediction built on a real-estate dataset. Implements feature engineering, preprocessing, and a Random Forest regressor with cross-validation and performance evaluation.
+      </div>
+      <div class="project-stack">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Random Forest</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / EDUCATION -->
+<section id="experience">
+  <div class="section-label fade-up">Background</div>
+  <h2 class="fade-up">Experience & Education</h2>
+
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">Jul 2025 – Sep 2025</div>
+      <div class="timeline-title">IT Trainee</div>
+      <div class="timeline-company">Ardhi University, Dar es Salaam</div>
+      <div class="timeline-desc">Performed routine computer maintenance, diagnosed hardware and software issues, and provided technical support to staff. Facilitated a training session for primary school teachers on Microsoft Office applications.</div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">Jul 2025 – Sep 2025</div>
+      <div class="timeline-title">Multimedia Trainee</div>
+      <div class="timeline-company">Ardhi University, Dar es Salaam</div>
+      <div class="timeline-desc">Edited promotional and documentary videos using CapCut. Designed posters and digital graphics in Adobe Photoshop and Canva. Produced a documentary highlighting key community and organisational initiatives.</div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">Jul 2025 – Sep 2025</div>
+      <div class="timeline-title">Software Development Trainee</div>
+      <div class="timeline-company">Ardhi University, Dar es Salaam</div>
+      <div class="timeline-desc">Built and refined web components using HTML, CSS, and JavaScript as part of a collaborative development team. Integrated multimedia elements into application interfaces and conducted quality assurance testing.</div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">Expected Jul 2026</div>
+      <div class="timeline-title">BSc Information Systems Management</div>
+      <div class="timeline-company">Ardhi University, Dar es Salaam</div>
+      <div class="timeline-desc">Coursework covering cloud and DevOps (CN 354), emerging information technologies and ML (IS 352), software engineering, and systems architecture. Applying academic knowledge in real-world project work throughout the degree.</div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-date">May 2023</div>
+      <div class="timeline-title">Advanced Secondary Level Certificate (ACSEE)</div>
+      <div class="timeline-company">Baobab Secondary School, Bagamoyo</div>
+      <div class="timeline-desc"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-up">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2>Let's build something</h2>
+    <p style="color:var(--muted); font-weight:300; margin-top:1rem;">
+      Open to collaborations, freelance work, and interesting problems. Based in Dar es Salaam — available remotely worldwide.
+    </p>
+    <a href="mailto:reubenreagan501@gmail.com" class="contact-email">reubenreagan501@gmail.com</a>
+    
+    <div class="social-links">
+      <a href="https://github.com/Reggy501" class="social-link" target="_blank">GitHub</a>
+      <a href="tel:+255616679069" class="social-link">+255 616 679 069</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">Reagan Charles Reuben — Dar es Salaam, Tanzania</span>
+  <span class="footer-text">Built with intention. © 2025</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 80}ms`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
